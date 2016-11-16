@@ -1,6 +1,6 @@
 set nocompatible
 
-call plug#begin('~/vimfiles/bundle')
+call plug#begin('~/.vim/plugged')
 " Plug 'tpope/vim-surround'
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
