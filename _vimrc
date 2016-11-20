@@ -14,6 +14,12 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tmhedberg/SimpylFold'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'nvie/vim-flake8'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 
@@ -63,7 +69,8 @@ colorscheme solarized
 " Activate the NERDTree when launching vim
 autocmd vimenter * NERDTree
 
-
+" run python program with f9
+nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
 
 augroup vimrc
 	autocmd!
