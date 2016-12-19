@@ -14,12 +14,13 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmhedberg/SimpylFold'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'nvie/vim-flake8'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
+Plug 'Valloric/YouCompleteMe'
+
 call plug#end()
 
 
@@ -40,7 +41,7 @@ set scrolloff=3           " Display at least 3 lines around you cursor
                           " (for scrolling)
 
 set guioptions=T          " Enable the toolbar
-set guifont=Consolas:h12
+set guifont=Consolas:h11
 " -- Search
 set ignorecase            " Ignore case when searching
 set smartcase             " If there is an uppercase in your search term
@@ -59,9 +60,25 @@ set backspace=indent,eol,start
 " to another buffer
 set hidden
 
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+
+" Enable folding with the spacebar
+nnoremap <space> za
+
+set encoding=utf-8
+
 " Use the dark version of Solarized
-set background=dark
-colorscheme solarized
+if has('gui_running')
+  set background=dark
+  colorscheme solarized
+else
+  colorscheme zenburn
+endif
+
+call togglebg#map("<F5>")
+
 
 " Press the j 2 times in a row for ESC
 :imap jj <Esc>
@@ -69,8 +86,33 @@ colorscheme solarized
 " Activate the NERDTree when launching vim
 autocmd vimenter * NERDTree
 
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+
+let python_highlight_all=1
+syntax on
+
 " run python program with f9
 nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+
+" disable preview
+set completeopt-=preview
+
+
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
+
+
+au BufNewFile,BufRead *.js,*.html,*.css:
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
 
 augroup vimrc
 	autocmd!
@@ -79,7 +121,6 @@ augroup end
 autocmd vimrc BufWritePost $MYVIMRC source $MYVIMRC
 autocmd vimrc VimEnter * set visualbell t_vb=
 autocmd vimrc GuiEnter * set visualbell t_vb=
-
 
 let g:airline_left_sep=''
 let g:airline_left_alt_sep=''
