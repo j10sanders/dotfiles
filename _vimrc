@@ -20,6 +20,7 @@ Plug 'nvie/vim-flake8'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'Valloric/YouCompleteMe'
+Plug 'fisadev/vim-isort'
 
 call plug#end()
 
